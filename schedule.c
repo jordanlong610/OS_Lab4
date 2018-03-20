@@ -19,15 +19,19 @@
 sem_t timer;
 sem_t ready;
 
+pthread_t tid;
+pthread_attr_t attr;
 
 
+/*
+ * Main method for the thread scheduling program.
+ */
 int main(int argc, char **argv)
 {
 
-	pthread_t tid;
-	pthread_attr_t attr;
-//	sem_init(&ready, 0, 0);
-//	sem_init(&timer, 0, 1);
+
+	sem_init(&ready, 0, 0);
+	sem_init(&timer, 0, 1);
 
 
 	/*
@@ -40,9 +44,9 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-int threads = atoi(argv[1]);
-int timeQ = atoi(argv[2]);
-int burstTime[threads];
+	int threads = atoi(argv[1]);
+	int timeQ = atoi(argv[2]);
+	int burstTime[threads];
 
 	/*
 	 * Prints out requests for burst times of each thread, and stores value in array. Padded +1 to be more readable.
@@ -55,24 +59,12 @@ int burstTime[threads];
 
 
 
+	pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
 
 
 
 
 
-//sem_wait(&timer);       // wait for the timer signal
-//sem_post(&ready);       // fetch a thread in front of a waiting queue
-//
-//
-//
-//
-//
-//pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
-//
-//
-//
-//
-//
 //policy = SCHED_RR;
 //pthread_attr_setschedpolicy(&attr, policy);
 
@@ -84,7 +76,26 @@ int burstTime[threads];
 
 
 
+void runner()
+{
 
+
+
+	/* acquire the semaphore */
+//	sem_wait(&sem);
+	sem_wait(&timer);       // wait for the timer signal
+
+
+	/* critical section */
+
+
+
+	/* release the semaphore */
+//	sem_post(&sem);
+	sem_post(&ready);       // fetch a thread in front of a waiting queue
+
+
+}
 
 
 
