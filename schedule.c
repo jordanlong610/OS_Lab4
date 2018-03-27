@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 {
 
 
-	sem_init(&ready, 0, 0);
-	sem_init(&timer, 0, 1);
+//	sem_init(&ready, 0, 0);
+//	sem_init(&timer, 0, 1);
 
 
 	/*
@@ -49,12 +49,12 @@ int main(int argc, char **argv)
 	int burstTime[threads];
 
 	/*
-	 * Prints out requests for burst times of each thread, and stores value in array. Padded +1 to be more readable.
+	 * Prints out requests for burst times of each thread, and stores value in array burstTime.
 	 */
-	for(int i =1; i<threads+1; i++)
+	for(int i =0; i<threads; i++)
 	{
 		printf("\nBurst time for Thread %d: ", i);
-		scanf("%d", &burstTime[0]);
+		scanf("%d", &burstTime[i]);
 	}
 
 
@@ -83,7 +83,7 @@ void runner()
 
 	/* acquire the semaphore */
 //	sem_wait(&sem);
-	sem_wait(&timer);       // wait for the timer signal
+//	sem_wait(&timer);       // wait for the timer signal
 
 
 	/* critical section */
@@ -92,7 +92,7 @@ void runner()
 
 	/* release the semaphore */
 //	sem_post(&sem);
-	sem_post(&ready);       // fetch a thread in front of a waiting queue
+//	sem_post(&ready);       // fetch a thread in front of a waiting queue
 
 
 }
