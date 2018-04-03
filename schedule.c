@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
 	/*
 	 * If integer is not included when the program is run, throws error
-	 * ./a.out 5 5 2
+	 * ./a.out 5 5
 	 */
 	if(argc!=3)
 	{
@@ -142,17 +142,4 @@ int main(int argc, char **argv)
 	}
 	pthread_join(timer_thread, NULL);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
